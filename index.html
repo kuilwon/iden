@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vimeo Loop with Sound</title>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+        }
+        iframe {
+            width: 80vw;
+            height: 45vw;
+            max-width: 1280px;
+            max-height: 720px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <iframe 
+        id="vimeo-player" 
+        src="https://player.vimeo.com/video/1034703193?autoplay=1&loop=0&muted=0" 
+        frameborder="0" 
+        allow="autoplay; fullscreen" 
+        allowfullscreen>
+    </iframe>
+
+    <script>
+        const iframe = document.getElementById('vimeo-player');
+        const player = new Vimeo.Player(iframe);
+
+        // Ensure video volume is on and replay on 'ended' event
+        player.setVolume(1); // Set volume to maximum (1.0)
+        player.on('ended', function() {
+            player.setCurrentTime(0).then(() => {
+                player.play();
+            });
+        });
+    </script>
+</body>
+</html>
